@@ -11,6 +11,8 @@ class PatientRepository {
   async findAll() {
     return this.model.find();
   }
+
+
 }
 
 export { PatientRepository };

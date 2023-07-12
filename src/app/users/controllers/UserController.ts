@@ -3,6 +3,7 @@ import { UserService } from "../services/UserService";
 import { makeCreateUserSchema } from "../schemas/createUserSchema";
 import { makeDeleteUserSchema } from "../schemas/deleteUserSchema";
 
+
 class UserController {
   constructor(private service: UserService) {}
 
@@ -70,9 +71,9 @@ class UserController {
 
   async findById(req: Request, res: Response) {
     try {
-      const userId = req.params.id; 
+      const userId = req.params.id;
 
-     const user = await this.service.findUser(userId)
+      const user = await this.service.findUser(userId);
 
       if (user) {
         res.status(200).json(user);
@@ -89,6 +90,7 @@ class UserController {
       });
     }
   }
+  
 }
 
 export { UserController };

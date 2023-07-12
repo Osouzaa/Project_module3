@@ -1,3 +1,4 @@
+
 import { CreateUserDTO } from "../dtos/createUserDto";
 import { UserRepository } from "../repositories/UserRepository";
 import bcrypt from "bcrypt";
@@ -19,7 +20,6 @@ class UserService {
         ...user,
         password: bcrypt.hashSync(user.password, 5),
       };
-
       const createdUser = await this.repository.create(payload);
       return {
         error: false,
@@ -91,6 +91,7 @@ class UserService {
       };
     }
   }
+ 
 }
 
 export { UserService };

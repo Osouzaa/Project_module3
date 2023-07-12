@@ -27,6 +27,26 @@ class UserRepository {
   async delete(id: string) {
     return this.model.findByIdAndDelete(id);
   }
+
+  async pushPacient(userId: string, pacientId: string) {
+    // console.log("ID do usuário:", userId);
+    // console.log("ID do paciente:", pacientId);
+
+    const pushFind = this.model
+      .findByIdAndUpdate(
+        userId,
+        {
+          $push: {
+            patient: pacientId,
+          },
+        },
+        { new: true }
+      )
+      .populate("patient");
+    // console.log("Resultado da função pushPacient:", pushFind);
+
+    return pushFind;
+  }
 }
 
 export { UserRepository };

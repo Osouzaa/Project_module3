@@ -6,8 +6,12 @@ class PatientController {
   constructor(private service: PatientService) {}
 
   async create(req: Request, res: Response) {
-    const { body } = req;
+    const {
+      body,
+      params: { user_id },
+    } = req;
 
+    // console.log("Resultado user_id do controller ", user_id);
     try {
       await makeCreatePatientSchema().validate(body);
     } catch (error: any) {
@@ -15,7 +19,11 @@ class PatientController {
         errors: error.errors,
       });
     }
-    const result = await this.service.create(body);
+
+    const result = (await this.service.create({
+      ...body,
+      userId: user_id,
+    })) as any;
     if ("error" in result) {
       return res.status(result.status).json(result);
     }
