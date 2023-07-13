@@ -10,8 +10,6 @@ class PatientController {
       body,
       params: { user_id },
     } = req;
-
-    // console.log("Resultado user_id do controller ", user_id);
     try {
       await makeCreatePatientSchema().validate(body);
     } catch (error: any) {
@@ -19,7 +17,6 @@ class PatientController {
         errors: error.errors,
       });
     }
-
     const result = (await this.service.create({
       ...body,
       userId: user_id,
@@ -35,11 +32,22 @@ class PatientController {
       const patients = await this.service.findPatient();
       return res.status(200).json(patients);
     } catch (error) {
-      console.log("Erro ao buscar usuários", error);
       return res.status(500).json({
         error: true,
-        message: "Erro interno do servidor",
+        message: "Internal Server Error",
         status: 500,
+      });
+    }
+  }
+  async findById(req: Request, res: Response) {
+    try {
+      const pacientId = req.params.id;
+      const pacient = await this.service.findIDPatient(pacientId);
+      res.status(200).json(pacient);
+    } catch (error) {
+      res.status(500).json({
+        error: true,
+        message: "Internal Server Error",
       });
     }
   }

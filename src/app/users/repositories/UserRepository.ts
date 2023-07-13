@@ -17,7 +17,7 @@ class UserRepository {
   }
 
   async findId(id: string) {
-    return this.model.findById(id).populate("Patient");
+    return this.model.findById(id).populate("patient");
   }
 
   async uptadeUser(id: string, payload: any) {
@@ -29,9 +29,6 @@ class UserRepository {
   }
 
   async pushPacient(userId: string, pacientId: string) {
-    // console.log("ID do usuário:", userId);
-    // console.log("ID do paciente:", pacientId);
-
     const pushFind = this.model
       .findByIdAndUpdate(
         userId,
@@ -43,8 +40,6 @@ class UserRepository {
         { new: true }
       )
       .populate("patient");
-    // console.log("Resultado da função pushPacient:", pushFind);
-
     return pushFind;
   }
 }

@@ -12,7 +12,9 @@ class PatientRepository {
     return this.model.find();
   }
 
-
+  async findById(id: string) {
+    return this.model.findById(id);
+  }
 }
 
 export { PatientRepository };
