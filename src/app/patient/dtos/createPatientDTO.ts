@@ -1,4 +1,3 @@
-
 interface CreatePatientDTO {
   name: string;
   birthdate: Date;
