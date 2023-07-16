@@ -47,6 +47,45 @@ class PatientService {
       };
     }
   }
+  async findPatientsByUserId(userId: string) {
+    try {
+      return this.repository.findByUserId(userId);
+    } catch (error) {
+      return {
+        error: true,
+        message: "Internal server error",
+        status: 500,
+      };
+    }
+  }
+  async delete(id: string) {
+    try {
+      return this.repository.deletePacient(id);
+    } catch (error) {
+      return {
+        error: true,
+        message: "Internal server error",
+        status: 500,
+      };
+    }
+  }
+  async uptadePatientID(id: string, payload: CreatePatientDTO) {
+    try {
+      const PatientUpdated = await this.repository.uptadePacient(id, payload);
+
+      return {
+        message: "Patient updated",
+        statusCode: 200,
+        data: PatientUpdated,
+      };
+    } catch (error: any) {
+      return {
+        message: error.message || "Internal server error",
+        statusCode: error.message ? 400 : 500,
+        data: null,
+      };
+    }
+  }
 }
 
 export { PatientService };
