@@ -10,12 +10,10 @@ const timelineController = TimelineModule.build().controller;
 routerPatient.get("/", patientController.find.bind(patientController));
 routerPatient.get(
   "/:id",
-  EnsureAuthenticate.execute,
   patientController.findById.bind(patientController)
 );
 routerPatient.get(
   "/user/:user_id",
-  EnsureAuthenticate.execute,
   patientController.findByUserId.bind(patientController)
 );
 routerPatient.delete("/:id", patientController.delete.bind(patientController));

@@ -11,18 +11,18 @@ const patientController = PatientModule.build().controller;
 userRouter.post("/", userController.create.bind(userController));
 
 // Deleta um usuario
-userRouter.delete("/:id",EnsureAuthenticate.execute,userController.delete.bind(userController));
+userRouter.delete("/:id",userController.delete.bind(userController));
 
 // Busca todos os usuarios
 userRouter.get("/", userController.find.bind(userController));
 
 // Atualiza um usuario
-userRouter.patch("/:id",EnsureAuthenticate.execute,userController.update.bind(userController));
+userRouter.patch("/:id",userController.update.bind(userController));
 
 
 userRouter.get("/:id", userController.findById.bind(userController));
 
 // Atrela um pacient 
-userRouter.post("/:user_id/pacients",EnsureAuthenticate.execute,patientController.create.bind(patientController));
+userRouter.post("/:user_id/pacients",patientController.create.bind(patientController));
 
 export { userRouter };

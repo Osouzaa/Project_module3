@@ -9,6 +9,6 @@ const OccurrenceSchema: Schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const OccurrenceModel = mongoose.model("Occurence", OccurrenceSchema);
+const OccurrenceModel = mongoose.model("Occurrences", OccurrenceSchema);
 
 export { OccurrenceModel };

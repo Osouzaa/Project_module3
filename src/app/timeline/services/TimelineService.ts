@@ -29,6 +29,56 @@ class TimelineService {
       };
     }
   }
+
+  async findTimelineByPatientId(patientId: string) {
+    try {
+      return this.repository.findByPatientId(patientId);
+    } catch (error) {
+      return {
+        error: true,
+        message: "Internal server error",
+        status: 500,
+      };
+    }
+  }
+
+  async findIdTimeline(id: string) {
+    try {
+      return this.repository.findById(id);
+    } catch (error) {
+      return {
+        error: true,
+        message: "Internal server error",
+        status: 500,
+      };
+    }
+  }
+
+  async delete(id: string) {
+    try {
+      return this.repository.deleteTimeline(id);
+    } catch (error) {
+      return { error: true, message: "Internal server error", status: 500 };
+    }
+  }
+
+  async updateTimelineId(id: string, payload: CreateTimelineDTO) {
+    try {
+      const TimelineUpdated = await this.repository.updateTimeline(id, payload);
+
+      return {
+        message: "Timeline updated",
+        statusCode: 200,
+        data: TimelineUpdated,
+      };
+    } catch (error: any) {
+      return {
+        message: error.message || "Internal server error",
+        statusCode: error.message ? 400 : 500,
+        data: null,
+      };
+    }
+  }
 }
 
 export { TimelineService };
