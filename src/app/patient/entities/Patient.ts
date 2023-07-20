@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const PatientSchema: Schema = new mongoose.Schema(
+const PatientSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     birthdate: { type: Date, required: true },

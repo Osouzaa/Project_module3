@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const OccurrenceSchema: Schema = new mongoose.Schema(
+const OccurrenceSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     content: { type: String, required: true },

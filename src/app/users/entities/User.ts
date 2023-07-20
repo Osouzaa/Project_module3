@@ -5,7 +5,12 @@ const UserSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    patient: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Patient' }]
+    patient: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Patient' }],
+    photo: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Files",
+      //required:true
+    }
   },
   { timestamps: true }
 );
@@ -13,3 +18,4 @@ const UserSchema = new mongoose.Schema(
 const UserModel = mongoose.model("User", UserSchema);
 
 export { UserModel };
+

@@ -1,12 +1,15 @@
-
-import { CreateUserDTO } from "../dtos/createUserDto";
+import { FilesRepository } from "../../files/repositories/FilesRepository";
+import { CreateUserDTO, CreateUserServiceDTO } from "../dtos/createUserDto";
 import { UserRepository } from "../repositories/UserRepository";
 import bcrypt from "bcrypt";
 
 class UserService {
-  constructor(private repository: UserRepository) {}
+  constructor(
+    private repository: UserRepository,
+    private filesRepository: FilesRepository
+  ) {}
 
-  async create(user: CreateUserDTO) {
+  async create(user: CreateUserServiceDTO) {
     try {
       const userAlreadyExist = await this.repository.findByEmail(user.email);
       if (userAlreadyExist) {
@@ -16,17 +19,23 @@ class UserService {
           status: 400,
         };
       }
+      const photo = await this.filesRepository.create(user.photo);
+
       const payload = {
         ...user,
         password: bcrypt.hashSync(user.password, 5),
+        photo: photo.id,
       };
+
       const createdUser = await this.repository.create(payload);
-      return {
-        error: false,
-        data: createdUser,
-        message: "User created successfully",
-        status: 201,
-      };
+      return { ...(createdUser as any)._doc, photo };
+      
+      // return {
+      //   error: false,
+      //   data: createdUser,
+      //   message: "User created successfully",
+      //   status: 201,
+      // };
     } catch (error) {
       console.log("Error creating User", error);
       return {
@@ -36,6 +45,7 @@ class UserService {
       };
     }
   }
+
   async delete(id: string) {
     try {
       return this.repository.delete(id);
@@ -91,7 +101,6 @@ class UserService {
       };
     }
   }
- 
 }
 
 export { UserService };

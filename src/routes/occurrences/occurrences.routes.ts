@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { OccurrenceModule } from "../../app/occurrences/OccurenceModule";
 
+
 const occurrenceRouter = Router();
 const occurencesController = OccurrenceModule.build().controller;
 
@@ -23,4 +24,6 @@ occurrenceRouter.delete(
   "/:id",
   occurencesController.delete.bind(occurencesController)
 );
+
+
 export { occurrenceRouter };
