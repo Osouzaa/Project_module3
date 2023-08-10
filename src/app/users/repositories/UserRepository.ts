@@ -12,14 +12,6 @@ class UserRepository {
     return this.model.findOne({ email });
   }
 
-  async find() {
-    return this.model.find();
-  }
-
-  async findId(id: string) {
-    return this.model.findById(id).populate("patient");
-  }
-
   async uptadeUser(id: string, payload: any) {
     return this.model.findByIdAndUpdate(id, payload, { new: true });
   }

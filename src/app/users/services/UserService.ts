@@ -29,13 +29,6 @@ class UserService {
 
       const createdUser = await this.repository.create(payload);
       return { ...(createdUser as any)._doc, photo };
-      
-      // return {
-      //   error: false,
-      //   data: createdUser,
-      //   message: "User created successfully",
-      //   status: 201,
-      // };
     } catch (error) {
       console.log("Error creating User", error);
       return {
@@ -57,17 +50,6 @@ class UserService {
       };
     }
   }
-  async fetchUsers() {
-    try {
-      return this.repository.find();
-    } catch (error) {
-      return {
-        error: true,
-        message: "Internal server error",
-        status: 500,
-      };
-    }
-  }
 
   async uptadeUserID(id: string, payload: CreateUserDTO) {
     try {
@@ -81,18 +63,6 @@ class UserService {
         statusCode: 200,
         data: userUpdated,
       };
-    } catch (error: any) {
-      return {
-        message: error.message || "Internal server error",
-        statusCode: error.message ? 400 : 500,
-        data: null,
-      };
-    }
-  }
-
-  async findUser(id: string) {
-    try {
-      return this.repository.findId(id);
     } catch (error: any) {
       return {
         message: error.message || "Internal server error",

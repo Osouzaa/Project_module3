@@ -9,7 +9,6 @@ interface CreateUserDTO {
 
 interface CreateUserServiceDTO {
   name: string;
-  nickname: string;
   email: string;
   password: string;
   photo: CreateFilesDTO;

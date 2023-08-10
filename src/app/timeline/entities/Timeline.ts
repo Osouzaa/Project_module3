@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose"
 const TimelineSchema = new mongoose.Schema ({
     name: { type: String, required: true },
     occurrences: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Occurrences'}],
-    patientId: { type: Schema.Types.ObjectId, ref: 'Patient' },
+    patientId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Patient' },
 },
     { timestamps: true }
 )

@@ -18,13 +18,10 @@ userRouter.post(
 // Deleta um usuario
 userRouter.delete("/:id", userController.delete.bind(userController));
 
-// Busca todos os usuarios
-userRouter.get("/", userController.find.bind(userController));
 
 // Atualiza um usuario
 userRouter.patch("/:id", userController.update.bind(userController));
 
-userRouter.get("/:id", userController.findById.bind(userController));
 
 // Atrela um pacient
 userRouter.post(

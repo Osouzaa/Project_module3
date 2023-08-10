@@ -41,20 +41,6 @@ class UserController {
     return res.status(200).json({ message: "User deleted successfully" });
   }
 
-  async find(req: Request, res: Response) {
-    try {
-      const users = await this.service.fetchUsers();
-      return res.status(200).json(users);
-    } catch (error) {
-      console.log("Erro ao buscar usuários", error);
-      return res.status(500).json({
-        error: true,
-        message: "Erro interno do servidor",
-        status: 500,
-      });
-    }
-  }
-
   async update(req: Request, res: Response) {
     const { id } = req.params;
     const payload = req.body;
@@ -69,27 +55,7 @@ class UserController {
     });
   }
 
-  async findById(req: Request, res: Response) {
-    try {
-      const userId = req.params.id;
-
-      const user = await this.service.findUser(userId);
-
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res.status(404).json({
-          error: true,
-          message: "Usuário não encontrado",
-        });
-      }
-    } catch (error) {
-      res.status(500).json({
-        error: true,
-        message: "Internal server error",
-      });
-    }
-  }
+  
   
 }
 
